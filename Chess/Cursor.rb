@@ -1,5 +1,6 @@
 require "io/console"
 require_relative 'Board.rb'
+require 'byebug'
 
 KEYMAP = {
   " " => :space,
@@ -45,6 +46,10 @@ class Cursor
     handle_key(key)
   end
 
+  def toggle_selected
+
+  end
+
   private
 
   def read_char
@@ -76,20 +81,22 @@ class Cursor
     return input
   end
 
+
   def handle_key(key)
-    case key 
-    when :return || :space 
-      return @cursor_pos 
-    when :left || :right || :up || :down
+    case key
+    when :return, :space
+      return @cursor_pos
+    when :left, :right, :up, :down
       update_pos(key)
-    when :ctrl_c 
-      exit 
-    end 
+    when :ctrl_c
+      Process.exit(0)
+    end
   end
 
   def update_pos(diff)
-    if @board.valid_pos?(MOVES[diff])
-      @curser_pos = MOVES[diff] 
-    end 
+    new_pos = @cursor_pos.map.with_index {|e,i| (e + MOVES[diff][i])%8}
+    if @board.valid_pos?(new_pos)
+      @cursor_pos = new_pos
+    end
   end
 end
