@@ -27,17 +27,31 @@ class Display
   end
 
   def render_cursor(pos, char)
-    print char.type.colorize(
-      :color => char.color,
-      :background => :cyan
-    ).blink
+    if @board[pos].selected
+      print char.symbol.colorize(
+        :color => char.color,
+        :background => :cyan
+      ).blink
+    else
+      print char.symbol.colorize(
+        :color => char.color,
+        :background => :cyan
+      )
+    end
   end
 
   def render_tile(pos, char)
-    print char.type.colorize(
-      :color => char.color,
-      :background => @board.tile_color(pos)
-    )
+    if @board[pos].selected
+      print char.symbol.colorize(
+        :color => char.color,
+        :background => @board.tile_color(pos)
+      ).blink
+    else
+      print char.symbol.colorize(
+        :color => char.color,
+        :background => @board.tile_color(pos)
+      )
+    end
   end
 end
 
