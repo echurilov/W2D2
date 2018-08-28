@@ -5,6 +5,10 @@ class Piece
   def initialize
     @type = "Queen"
   end
+  
+  def inspect
+    @type
+  end
 end
 
 class NullPiece < Piece
