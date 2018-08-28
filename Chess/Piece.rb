@@ -3,7 +3,7 @@ require 'singleton'
 class Piece
   attr_reader :type
   def initialize
-    @type = "Queen"
+    @type = "Q"
   end
   
   def inspect
@@ -14,6 +14,6 @@ end
 class NullPiece < Piece
   include Singleton
   def initialize
-    @type = nil
+    @type = "_"
   end
 end
