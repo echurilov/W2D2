@@ -55,4 +55,4 @@ class Display
   end
 end
 
-display = Display.new(Board.new)
+# display = Display.new(Board.new)
